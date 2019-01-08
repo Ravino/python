@@ -1,56 +1,157 @@
-import numpy as np;
-
-#Создал два массива с рандомными значениями для удобства.
-#По аналогии, как вводил бы пользователь.
-arrMinus = np. random. randint (0, 100, 5) * -1;
-arrPlus = np. random. randint (0, 100, 5);
+import numpy as np;print ("Введите чётное число отрицательных и положительных значений. Для завершения ввода нажмите 0");
 
 
-#Произвёл конкатенацию в один массив. Всё равно, если бы пользователь ввёл все значения в один массив.
-arr = np. concatenate ((arrMinus, arrPlus));
-
-#Не смотря на схожесть элементов в массиве и результат операции склейки
-#Эффект работы самой программы будет эдентичен на любом наборе элементов массива
+inpList= [];
 
 
-#Сам код программы не зависимый от результатов в предыдущем блоке
-#Массивы для: отрицательных, положительных, результирующих значений
+while (True):
+
+  i = int (input ());
+
+  if (i == 0):
+    print ("Вы завершили ввод");
+    break;
+
+
+  print ("Вы ввели число: " + str (i));
+  inpList. append (i);
+
+
+arr = np. array (inpList);
+
+
 arrMinus = [];
 arrPlus = [];
 arrGen = [];
 
 
-
-print ("Печать исходного массива");
-
-
-for i in arr:
-  print (i);
+global countGenExternal;
+countGenExternal = 0;
 
 
-print ("Разложение массива. Левая-правая сортировка.");
+def external ():
+
+  print ("Вызов функции external");
 
 
-for i in arr:
-
-  if (i < 0):
-    arrMinus. append (i);
-    continue;
-
-  arrPlus. append (i);
+  try:
+    external. count += 1;
+    countGenExternal += 1;
 
 
-print ("Создание чередования элементов массива");
+  except AttributeError:
+    external. count = 1;
+    countGenExternal = 1;
 
 
-for i in np. arange (int (len (arr) / 2)):
-
-  arrGen. append (arrMinus [i]);
-  arrGen. append (arrPlus [i]);
+  print ("Печать исходного массива");
 
 
-print ("Печать конечного массива");
+  for i in arr:
+    print (i);
 
 
-for i in arrGen:
-  print (i);
+  print ("Разложение массива. Левая-правая сортировка.");
+
+
+  for i in arr:
+
+    if (i < 0):
+      arrMinus. append (i);
+      continue;
+
+    arrPlus. append (i);
+
+
+  print ("Создание чередования элементов массива");
+
+
+  for i in np. arange (int (len (arr) / 2)):
+
+    arrGen. append (arrMinus [i]);
+    arrGen. append (arrPlus [i]);
+
+
+  print ("Печать конечного массива");
+
+
+  for i in arrGen:
+    print (i);
+
+
+  print ("Количество вызовов функции по значению атрибута функции: " + str (external. count));
+  print ("Количество вызовов функций по количеству глобальной переменной: " + str (countGenExternal));
+
+
+
+
+global countGenInternal;
+countGenInternal = 0;
+
+
+def internal (arr, arrMinus, arrPlus, arrGen):
+
+  print ("Вызов функции internal");
+
+
+  try:
+    internal. count +=1;
+    countGen += 1;
+
+
+  except AttributeError:
+    internal. count = 1;
+    countGenInternal = 1;
+
+
+  print ("Печать исходного массива");
+
+
+  for i in arr:
+    print (i);
+
+
+  print ("Разложение массива. Левая-правая сортировка.");
+
+
+  for i in arr:
+
+    if (i < 0):
+      arrMinus. append (i);
+      continue;
+
+    arrPlus. append (i);
+
+
+  print ("Создание чередования элементов массива");
+
+
+  for i in np. arange (int (len (arr) / 2)):
+
+    arrGen. append (arrMinus [i]);
+    arrGen. append (arrPlus [i]);
+
+
+  print ("Печать конечного массива");
+
+
+  for i in arrGen:
+    print (i);
+
+
+  print ("Количество вызовов функции по значению атрибута функции: " + str (internal. count));
+  print ("Количество вызовов функций по количеству глобальной переменной: " + str (countGenInternal));
+
+
+
+
+print ("Вызывается функция external");
+
+
+external ();
+
+
+print ("Вызывается функция internal");
+
+
+internal (arr, arrMinus, arrPlus, arrGen);
