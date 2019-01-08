@@ -19,7 +19,7 @@ for i in np. arange ( len (matrix) ):
 
 
   print ("Замена максимального элемента в строке " + str (i) + " на число 100");
-  matrix [np. argmax (matrix [i])] = 100;
+  matrix [i] [np. argmax (matrix [i])] = 100;
 
 
   print ("Печать изменённых строк матрицы");
